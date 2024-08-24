@@ -1,8 +1,10 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { register } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: { name: '', email: '', password: '', confirmPassword: '' },
     onSubmit: async (values) => {
@@ -12,7 +14,8 @@ const Register = () => {
       }
       try {
         await register(values);
-        window.location.href = '/login';
+      navigate('/login');
+        //  window.location.href = '/login';
       } catch (error) {
         console.error(error);
       }
